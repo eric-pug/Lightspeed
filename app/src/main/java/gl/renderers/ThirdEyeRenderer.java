@@ -264,7 +264,9 @@ public abstract class ThirdEyeRenderer extends GLRenderer implements SensorEvent
             SensorManager.getOrientation(accumulatedRotation, deltaRotationVector);
             rotationAroundY=rotationAroundY*0.9f-0.1f*deltaRotationVector[2]*(float)(180/Math.PI);
         }
-
+        accelerometerReading[0]=0.0f;
+        accelerometerReading[1]=9.81f;
+        accelerometerReading[2]=0.0f;
 
         // Rotation matrix based on current readings from accelerometer and magnetometer.
         SensorManager.getRotationMatrix(currentRotation, null, accelerometerReading, magnetometerReading);
