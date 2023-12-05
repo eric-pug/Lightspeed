@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dig4634.glsurfaceviewexample">
+    package="com.example.dig4634.Lightspeed_Eric">
 
     <uses-feature android:glEsVersion="0x00030000" android:required="true"/>
     <uses-feature android:name="android.hardware.camera2.full"/>
@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppFullScreenTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name="com.example.dig4634.Lightspeed_Eric.MainActivity"
             android:theme="@style/AppFullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

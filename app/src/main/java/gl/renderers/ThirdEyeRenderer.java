@@ -26,8 +26,6 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.dig4634.glsurfaceviewexample.MainActivity;
-
 import java.util.Arrays;
 
 import androidx.annotation.NonNull;

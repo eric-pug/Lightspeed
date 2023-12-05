@@ -1,4 +1,4 @@
-package com.example.dig4634.glsurfaceviewexample;
+package com.example.dig4634.Lightspeed_Eric;
 
 import gl.modeltypes.ShadedTexturedModel;
 public class Obstacle extends ShadedTexturedModel {

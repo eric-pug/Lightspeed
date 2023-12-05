@@ -1,6 +1,5 @@
-package com.example.dig4634.glsurfaceviewexample;
+package com.example.dig4634.Lightspeed_Eric;
 
-import gl.modeltypes.ColoredModel;
 import gl.modeltypes.TexturedModel;
 
 public class Triangle extends TexturedModel {

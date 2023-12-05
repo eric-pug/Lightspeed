@@ -1,4 +1,4 @@
-package com.example.dig4634.glsurfaceviewexample;
+package com.example.dig4634.Lightspeed_Eric;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +17,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener, SurfaceHolder.Callback {
+import javax.microedition.khronos.opengles.GL10;
 
+public class MainActivity extends AppCompatActivity implements SensorEventListener, SurfaceHolder.Callback {
 
     MyRenderer my_renderer;
     SurfaceHolder holder = null;
