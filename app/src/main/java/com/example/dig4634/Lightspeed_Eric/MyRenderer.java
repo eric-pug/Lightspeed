@@ -90,7 +90,7 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
                         Math.abs(row1.level_segments[i].collectible.positionY- player.positionY)<0.5
                         && Math.abs(row1.level_segments[i].collectible.positionZ- player.positionZ)<0.5)
                     row1.level_segments[i].collectible.shown=false;
-                score++;
+                MainActivity.updateScore();
             }
 
             if(row1.level_segments[i].obstacle !=null){
@@ -109,7 +109,7 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
                         Math.abs(row2.level_segments[i].collectible.positionY- player.positionY)<0.5
                         && Math.abs(row2.level_segments[i].collectible.positionZ- player.positionZ)<0.5)
                     row2.level_segments[i].collectible.shown=false;
-                score++;
+                MainActivity.updateScore();
             }
 
             if(row2.level_segments[i].obstacle !=null){
@@ -128,7 +128,7 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
                         Math.abs(row3.level_segments[i].collectible.positionY- player.positionY)<0.5
                         && Math.abs(row3.level_segments[i].collectible.positionZ- player.positionZ)<0.5)
                     row3.level_segments[i].collectible.shown=false;
-                score++;
+                MainActivity.updateScore();
             }
 
             if(row3.level_segments[i].obstacle !=null){
@@ -147,7 +147,7 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
                         Math.abs(row4.level_segments[i].collectible.positionY- player.positionY)<0.5
                         && Math.abs(row4.level_segments[i].collectible.positionZ- player.positionZ)<0.5)
                     row4.level_segments[i].collectible.shown=false;
-                score++;
+                MainActivity.updateScore();
             }
 
             if(row4.level_segments[i].obstacle !=null){
@@ -166,7 +166,8 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
                         Math.abs(row5.level_segments[i].collectible.positionY- player.positionY)<0.5
                         && Math.abs(row5.level_segments[i].collectible.positionZ- player.positionZ)<0.5)
                     row5.level_segments[i].collectible.shown=false;
-                score++;
+                MainActivity.updateScore();
+
             }
 
             if(row5.level_segments[i].obstacle !=null){
@@ -177,7 +178,6 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
                     row5.level_segments[i].obstacle.shown=false;
             }
         }
-
     }
 
     @Override

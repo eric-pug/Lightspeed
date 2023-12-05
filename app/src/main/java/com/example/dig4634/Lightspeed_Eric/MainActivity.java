@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.TextView;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -42,12 +43,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         surfaceView.setRenderer(my_renderer);
         surfaceView.setOnTouchListener(my_renderer);
 
+        scoreTextView = findViewById(R.id.scoreText);
+
 
     }
 
     static int score = 0;
-    String scoreText="Score: " + score;
-    static float sensor_acc_x=0;
+    static String scoreText;
+    float sensor_acc_x=0;
+    static TextView scoreTextView;
+
+    public static void updateScore()
+    {
+        score++;
+        int temp=score;
+        scoreText = "Score: " + temp;
+        scoreTextView.setText(scoreText);
+    }
 
 
     @Override
