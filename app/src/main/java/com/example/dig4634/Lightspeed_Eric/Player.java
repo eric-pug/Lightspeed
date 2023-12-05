@@ -64,7 +64,7 @@ public class Player extends ShadedTexturedModel {
         {
             accY = -6;//gravity
 
-            accX = MainActivity.sensor_acc_x;
+            accX = -speedX/2;
 
             speedX += accX *perSec;
             speedY += accY *perSec;
@@ -77,6 +77,16 @@ public class Player extends ShadedTexturedModel {
 
             if(positionY<-1){
                 positionY=-1;
+                speedY=0;
+            }
+
+            if(positionX<-0.8f){
+                positionX=-0.8f;
+                speedY=0;
+            }
+
+            if(positionX>0.6f){
+                positionX=0.6f;
                 speedY=0;
             }
 

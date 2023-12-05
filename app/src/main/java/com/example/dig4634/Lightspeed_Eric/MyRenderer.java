@@ -204,19 +204,33 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
 
         if(event.getAction()==MotionEvent.ACTION_DOWN){
             Log.d("Example","tap");
+
             float tapX = event.getX();
+
             DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
-            float height = displayMetrics.heightPixels / displayMetrics.density;
+            //float height = displayMetrics.heightPixels / displayMetrics.density;
             float width = displayMetrics.widthPixels / displayMetrics.density;
 
-            if (tapX >= width/2)
-            {
-                player.speedX=1f;
+
+            switch(event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    // The user just touched the screen
+                    if (tapX >= (width/2)+400)
+                    {
+                        player.speedX+=1f;
+                    }
+                    else
+                    {
+                        player.speedX+=-1f;
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+                    // The touch just ended
+                    player.accX = -player.speedX/2;
+                    break;
             }
-            else
-            {
-                player.speedX=-1f;
-            }
+
+            return false;
         }
 
 
