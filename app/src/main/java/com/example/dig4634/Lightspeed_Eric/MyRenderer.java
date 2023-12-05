@@ -4,6 +4,7 @@ import static com.example.dig4634.Lightspeed_Eric.MainActivity.score;
 
 import android.app.Activity;
 import android.opengl.GLES30;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -92,13 +93,13 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
                 score++;
             }
 
-//            if(row1.level_segments[i].obstacle !=null){
-//
-//                if(Math.abs(row1.level_segments[i].obstacle.positionX- player.positionX)<5 &&
-//                        Math.abs(row1.level_segments[i].obstacle.positionY- player.positionY)<5
-//                        && Math.abs(row1.level_segments[i].obstacle.positionZ- player.positionZ)<5)
-//                    player.shown=false;
-//            }
+            if(row1.level_segments[i].obstacle !=null){
+
+                if(Math.abs(row1.level_segments[i].obstacle.positionX- player.positionX)<0.5 &&
+                        Math.abs(row1.level_segments[i].obstacle.positionY- player.positionY)<0.5
+                        && Math.abs(row1.level_segments[i].obstacle.positionZ- player.positionZ)<0.5)
+                    row1.level_segments[i].obstacle.shown=false;
+            }
         }
 
         for(int i = 0; i< row2.level_segments.length; i++){
@@ -111,13 +112,13 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
                 score++;
             }
 
-//            if(row2.level_segments[i].obstacle !=null){
-//
-//                if(Math.abs(row2.level_segments[i].obstacle.positionX- player.positionX)<5 &&
-//                        Math.abs(row2.level_segments[i].obstacle.positionY- player.positionY)<5
-//                        && Math.abs(row2.level_segments[i].obstacle.positionZ- player.positionZ)<5)
-//                    player.shown=false;
-//            }
+            if(row2.level_segments[i].obstacle !=null){
+
+                if(Math.abs(row2.level_segments[i].obstacle.positionX- player.positionX)<0.5 &&
+                        Math.abs(row2.level_segments[i].obstacle.positionY- player.positionY)<0.5
+                        && Math.abs(row2.level_segments[i].obstacle.positionZ- player.positionZ)<0.5)
+                    row2.level_segments[i].obstacle.shown=false;
+            }
         }
 
         for(int i = 0; i< row3.level_segments.length; i++){
@@ -130,13 +131,13 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
                 score++;
             }
 
-//            if(row3.level_segments[i].obstacle !=null){
-//
-//                if(Math.abs(row3.level_segments[i].obstacle.positionX- player.positionX)<5 &&
-//                        Math.abs(row3.level_segments[i].obstacle.positionY- player.positionY)<5
-//                        && Math.abs(row3.level_segments[i].obstacle.positionZ- player.positionZ)<5)
-//                    player.shown=false;
-//            }
+            if(row3.level_segments[i].obstacle !=null){
+
+                if(Math.abs(row3.level_segments[i].obstacle.positionX- player.positionX)<0.5 &&
+                        Math.abs(row3.level_segments[i].obstacle.positionY- player.positionY)<0.5
+                        && Math.abs(row3.level_segments[i].obstacle.positionZ- player.positionZ)<0.5)
+                    row3.level_segments[i].obstacle.shown=false;
+            }
         }
 
         for(int i = 0; i< row4.level_segments.length; i++){
@@ -149,13 +150,13 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
                 score++;
             }
 
-//            if(row4.level_segments[i].obstacle !=null){
-//
-//                if(Math.abs(row4.level_segments[i].obstacle.positionX- player.positionX)<5 &&
-//                        Math.abs(row4.level_segments[i].obstacle.positionY- player.positionY)<5
-//                        && Math.abs(row4.level_segments[i].obstacle.positionZ- player.positionZ)<5)
-//                    player.shown=false;
-//            }
+            if(row4.level_segments[i].obstacle !=null){
+
+                if(Math.abs(row4.level_segments[i].obstacle.positionX- player.positionX)<.5 &&
+                        Math.abs(row4.level_segments[i].obstacle.positionY- player.positionY)<.5
+                        && Math.abs(row4.level_segments[i].obstacle.positionZ- player.positionZ)<.5)
+                    row4.level_segments[i].obstacle.shown=false;
+            }
         }
 
         for(int i = 0; i< row5.level_segments.length; i++){
@@ -168,13 +169,13 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
                 score++;
             }
 
-//            if(row5.level_segments[i].obstacle !=null){
-//
-//                if(Math.abs(row5.level_segments[i].obstacle.positionX- player.positionX)<5 &&
-//                        Math.abs(row5.level_segments[i].obstacle.positionY- player.positionY)<5
-//                        && Math.abs(row5.level_segments[i].obstacle.positionZ- player.positionZ)<5)
-//                    player.shown=false;
-//            }
+            if(row5.level_segments[i].obstacle !=null){
+
+                if(Math.abs(row5.level_segments[i].obstacle.positionX- player.positionX)<0.5 &&
+                        Math.abs(row5.level_segments[i].obstacle.positionY- player.positionY)<0.5
+                        && Math.abs(row5.level_segments[i].obstacle.positionZ- player.positionZ)<0.5)
+                    row5.level_segments[i].obstacle.shown=false;
+            }
         }
 
     }
@@ -198,12 +199,24 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
 
 
     @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
+    public boolean onTouch(View view, MotionEvent event) {
 
 
-        if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+        if(event.getAction()==MotionEvent.ACTION_DOWN){
             Log.d("Example","tap");
-            player.speedX=1f;
+            float tapX = event.getX();
+            DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+            float height = displayMetrics.heightPixels / displayMetrics.density;
+            float width = displayMetrics.widthPixels / displayMetrics.density;
+
+            if (tapX >= width/2)
+            {
+                player.speedX=1f;
+            }
+            else
+            {
+                player.speedX=-1f;
+            }
         }
 
 
