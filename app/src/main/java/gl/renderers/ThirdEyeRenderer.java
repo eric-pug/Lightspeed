@@ -20,6 +20,7 @@ import android.hardware.camera2.params.StreamConfigurationMap;
 import android.opengl.Matrix;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
@@ -30,6 +31,8 @@ import java.util.Arrays;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+
+import com.example.dig4634.Lightspeed_Eric.Player;
 
 public abstract class ThirdEyeRenderer extends GLRenderer implements SensorEventListener {
 
@@ -216,11 +219,10 @@ public abstract class ThirdEyeRenderer extends GLRenderer implements SensorEvent
     public void onSensorChanged(SensorEvent event) {
 
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            //System.arraycopy(event.values, 0, accelerometerReading,
-            //      0, accelerometerReading.length);
-            accelerometerReading[0]=accelerometerReading[0]*0.9f+event.values[0]*0.1f;
-            accelerometerReading[1]=accelerometerReading[1]*0.9f+event.values[1]*0.1f;
-            accelerometerReading[2]=accelerometerReading[2]*0.9f-event.values[2]*0.1f;
+            System.arraycopy(event.values, 0, accelerometerReading,
+                  0, accelerometerReading.length);
+            Player.accX = -accelerometerReading[0];
+            //Log.e("DATA", String.valueOf(accelerometerReading[0]));
 
         } else if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
 
@@ -229,9 +231,13 @@ public abstract class ThirdEyeRenderer extends GLRenderer implements SensorEvent
             if (timestamp != 0) {
                 final float dT = (event.timestamp - timestamp) * NS2S;
                 // Axis of the rotation sample, not normalized yet.
-                float axisX = event.values[0];
-                float axisY = event.values[1];
-                float axisZ = event.values[2];
+                //float axisX = event.values[0];
+                //float axisY = event.values[1];
+                //float axisZ = event.values[2];
+                float axisX = 0;
+                float axisY = 0;
+                float axisZ = 0;
+
 
                 // Calculate the angular speed of the sample
                 float omegaMagnitude = (float)Math.sqrt(axisX*axisX + axisY*axisY + axisZ*axisZ);

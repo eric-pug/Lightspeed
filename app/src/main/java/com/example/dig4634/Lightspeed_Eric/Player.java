@@ -14,7 +14,7 @@ public class Player extends ShadedTexturedModel {
     public float speedY=0;
     public float speedZ=0;
 
-    public float accX =0;
+    public static float accX =0;
     public float accY =0;
     public float accZ =0;
 
@@ -64,7 +64,7 @@ public class Player extends ShadedTexturedModel {
         {
             accY = -6;//gravity
 
-            accX = -speedX/2;
+            //accX = -speedX/2;
 
             speedX += accX *perSec;
             speedY += accY *perSec;
@@ -82,12 +82,12 @@ public class Player extends ShadedTexturedModel {
 
             if(positionX<-0.8f){
                 positionX=-0.8f;
-                speedY=0;
+                speedX=0;
             }
 
             if(positionX>0.6f){
                 positionX=0.6f;
-                speedY=0;
+                speedX=0;
             }
 
             localTransform.reset();
