@@ -71,8 +71,8 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
     @Override
     public void simulate(double elapsedDisplayTime) {
 
-        float perSec=(float)(elapsedDisplayTime-lastTime);
-        lastTime=elapsedDisplayTime;
+        float perSec = (float) (elapsedDisplayTime - lastTime);
+        lastTime = elapsedDisplayTime;
 
         player.simulate(perSec);
         row1.simulate(perSec);
@@ -81,104 +81,31 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
         row4.simulate(perSec);
         row5.simulate(perSec);
 
-
         //collision detection logic
-        for(int i = 0; i< row1.level_segments.length; i++){
-            if(row1.level_segments[i].collectible !=null){
-
-                if(Math.abs(row1.level_segments[i].collectible.positionX- player.positionX)<0.5 &&
-                        Math.abs(row1.level_segments[i].collectible.positionY- player.positionY)<0.5
-                        && Math.abs(row1.level_segments[i].collectible.positionZ- player.positionZ)<0.5)
-                    row1.level_segments[i].collectible.shown=false;
-                MainActivity.updateScore();
-            }
-
-            if(row1.level_segments[i].obstacle !=null){
-
-                if(Math.abs(row1.level_segments[i].obstacle.positionX- player.positionX)<0.5 &&
-                        Math.abs(row1.level_segments[i].obstacle.positionY- player.positionY)<0.5
-                        && Math.abs(row1.level_segments[i].obstacle.positionZ- player.positionZ)<0.5)
-                    row1.level_segments[i].obstacle.shown=false;
-            }
-        }
-
-        for(int i = 0; i< row2.level_segments.length; i++){
-            if(row2.level_segments[i].collectible !=null){
-
-                if(Math.abs(row2.level_segments[i].collectible.positionX- player.positionX)<0.5 &&
-                        Math.abs(row2.level_segments[i].collectible.positionY- player.positionY)<0.5
-                        && Math.abs(row2.level_segments[i].collectible.positionZ- player.positionZ)<0.5)
-                    row2.level_segments[i].collectible.shown=false;
-                MainActivity.updateScore();
-            }
-
-            if(row2.level_segments[i].obstacle !=null){
-
-                if(Math.abs(row2.level_segments[i].obstacle.positionX- player.positionX)<0.5 &&
-                        Math.abs(row2.level_segments[i].obstacle.positionY- player.positionY)<0.5
-                        && Math.abs(row2.level_segments[i].obstacle.positionZ- player.positionZ)<0.5)
-                    row2.level_segments[i].obstacle.shown=false;
-            }
-        }
-
-        for(int i = 0; i< row3.level_segments.length; i++){
-            if(row3.level_segments[i].collectible !=null){
-
-                if(Math.abs(row3.level_segments[i].collectible.positionX- player.positionX)<0.5 &&
-                        Math.abs(row3.level_segments[i].collectible.positionY- player.positionY)<0.5
-                        && Math.abs(row3.level_segments[i].collectible.positionZ- player.positionZ)<0.5)
-                    row3.level_segments[i].collectible.shown=false;
-                MainActivity.updateScore();
-            }
-
-            if(row3.level_segments[i].obstacle !=null){
-
-                if(Math.abs(row3.level_segments[i].obstacle.positionX- player.positionX)<0.5 &&
-                        Math.abs(row3.level_segments[i].obstacle.positionY- player.positionY)<0.5
-                        && Math.abs(row3.level_segments[i].obstacle.positionZ- player.positionZ)<0.5)
-                    row3.level_segments[i].obstacle.shown=false;
-            }
-        }
-
-        for(int i = 0; i< row4.level_segments.length; i++){
-            if(row4.level_segments[i].collectible !=null){
-
-                if(Math.abs(row4.level_segments[i].collectible.positionX- player.positionX)<0.5 &&
-                        Math.abs(row4.level_segments[i].collectible.positionY- player.positionY)<0.5
-                        && Math.abs(row4.level_segments[i].collectible.positionZ- player.positionZ)<0.5)
-                    row4.level_segments[i].collectible.shown=false;
-                MainActivity.updateScore();
-            }
-
-            if(row4.level_segments[i].obstacle !=null){
-
-                if(Math.abs(row4.level_segments[i].obstacle.positionX- player.positionX)<.5 &&
-                        Math.abs(row4.level_segments[i].obstacle.positionY- player.positionY)<.5
-                        && Math.abs(row4.level_segments[i].obstacle.positionZ- player.positionZ)<.5)
-                    row4.level_segments[i].obstacle.shown=false;
-            }
-        }
-
-        for(int i = 0; i< row5.level_segments.length; i++){
-            if(row5.level_segments[i].collectible !=null){
-
-                if(Math.abs(row5.level_segments[i].collectible.positionX- player.positionX)<0.5 &&
-                        Math.abs(row5.level_segments[i].collectible.positionY- player.positionY)<0.5
-                        && Math.abs(row5.level_segments[i].collectible.positionZ- player.positionZ)<0.5)
-                    row5.level_segments[i].collectible.shown=false;
-                MainActivity.updateScore();
-
-            }
-
-            if(row5.level_segments[i].obstacle !=null){
-
-                if(Math.abs(row5.level_segments[i].obstacle.positionX- player.positionX)<0.5 &&
-                        Math.abs(row5.level_segments[i].obstacle.positionY- player.positionY)<0.5
-                        && Math.abs(row5.level_segments[i].obstacle.positionZ- player.positionZ)<0.5)
-                    row5.level_segments[i].obstacle.shown=false;
+        Level[] rows = {row1, row2, row3, row4, row5};
+        for (Level row : rows) {
+            for (int i = 0; i < row.level_segments.length; i++) {
+                if (row.level_segments[i].collectible != null) {
+                    if (Math.abs(row.level_segments[i].collectible.positionX - player.positionX) < 0.5 &&
+                            Math.abs(row.level_segments[i].collectible.positionY - player.positionY) < 0.5 &&
+                            Math.abs(row.level_segments[i].collectible.positionZ - player.positionZ) < 0.5) {
+                        if (row.level_segments[i].collectible.shown) {
+                            row.level_segments[i].collectible.shown = false;
+                            MainActivity.updateScore();
+                        }
+                    }
+                }
+                if (row.level_segments[i].obstacle != null) {
+                    if (Math.abs(row.level_segments[i].obstacle.positionX - player.positionX) < 0.5 &&
+                            Math.abs(row.level_segments[i].obstacle.positionY - player.positionY) < 0.5 &&
+                            Math.abs(row.level_segments[i].obstacle.positionZ - player.positionZ) < 0.5) {
+                        row.level_segments[i].obstacle.shown = false;
+                    }
+                }
             }
         }
     }
+
 
     @Override
     public void draw() {

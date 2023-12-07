@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
         my_renderer=new MyRenderer(this);
-       // my_renderer.showCamera(findViewById(R.id.textureView));
+        // my_renderer.showCamera(findViewById(R.id.textureView));
 
         surfaceView.setRenderer(my_renderer);
         surfaceView.setOnTouchListener(my_renderer);
@@ -56,9 +56,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public static void updateScore()
     {
         score++;
-        int temp=score;
+        final int temp = score;
         scoreText = "Score: " + temp;
-        scoreTextView.setText(scoreText);
+
+        // Run the update on the UI thread
+        scoreTextView.post(new Runnable() {
+            @Override
+            public void run() {
+                scoreTextView.setText(scoreText);
+            }
+        });
     }
 
 
