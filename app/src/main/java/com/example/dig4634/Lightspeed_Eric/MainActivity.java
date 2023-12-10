@@ -13,6 +13,7 @@ import android.hardware.SensorManager;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -20,7 +21,7 @@ import android.widget.TextView;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener, SurfaceHolder.Callback {
+public class MainActivity extends AppCompatActivity implements SensorEventListener, SurfaceHolder.Callback, MyRenderer.DataListener {
 
     MyRenderer my_renderer;
     SurfaceHolder holder = null;
@@ -44,16 +45,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         surfaceView.setOnTouchListener(my_renderer);
 
         scoreTextView = findViewById(R.id.scoreText);
-
+        timeTextView = findViewById(R.id.timeText);
 
     }
 
     static int score = 0;
     static String scoreText;
+    static String timeText;
     float sensor_acc_x=0;
     static TextView scoreTextView;
 
-    public static void updateScore()
+    static TextView timeTextView;
+    public static void updateScore(int time)
     {
         score++;
         final int temp = score;
@@ -63,10 +66,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         scoreTextView.post(new Runnable() {
             @Override
             public void run() {
-                scoreTextView.setText(scoreText);
-            }
+                scoreTextView.setText(scoreText);}
+        });
+
+
+    }
+
+    public static void updateTime(int time)
+    {
+        timeText = "Time: " + time;
+        timeTextView.post(new Runnable() {
+            @Override
+            public void run() {
+                timeTextView.setText(timeText);}
         });
     }
+
 
 
     @Override
@@ -134,5 +149,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
         holder=null;
+    }
+
+    @Override
+    public void onDataReceived(int time) {
+        Log.e("TEST", String.valueOf(time));
+        Intent i = new Intent(MainActivity.this, Leaderboard.class);
+        i.putExtra("score",time + score);
+        startActivity(i);
+
+
     }
 }

@@ -1,6 +1,7 @@
 package com.example.dig4634.Lightspeed_Eric;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.opengl.GLES30;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -49,9 +50,10 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
     Texture ship_texture;
 
     Texture space_texture;
-
+    private DataListener dataListener;
     public MyRenderer(Activity activity){
         super(activity);
+        this.dataListener = (DataListener) activity;
     }
 
 
@@ -116,6 +118,7 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
         lastTime = elapsedDisplayTime;
         gameTime+=perSec;
         levelTime+=perSec;
+        MainActivity.updateTime((int) gameTime);
         if (levelTime > 5)
         {
             levelCounter++;
@@ -162,7 +165,7 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
                             Math.abs(row.level_segments[i].collectible.positionZ - player.positionZ) < 0.5) {
                         if (row.level_segments[i].collectible.shown) {
                             row.level_segments[i].collectible.shown = false;
-                            MainActivity.updateScore();
+                            MainActivity.updateScore((int)gameTime);
                         }
                     }
                 }
@@ -171,10 +174,15 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
                             Math.abs(row.level_segments[i].obstacle.positionY - player.positionY) < 0.5 &&
                             Math.abs(row.level_segments[i].obstacle.positionZ - player.positionZ) < 0.5) {
                         row.level_segments[i].obstacle.shown = false;
+                        dataListener.onDataReceived((int)gameTime);
                     }
                 }
             }
         }
+    }
+
+    public interface DataListener {
+        void onDataReceived(int data); // Define the method signature to send data
     }
 
 
