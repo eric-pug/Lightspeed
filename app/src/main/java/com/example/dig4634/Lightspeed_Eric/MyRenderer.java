@@ -105,11 +105,27 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
 
     double lastTime=0;
 
+    double gameTime = 0;
+    double levelTime = 0;
+    int levelCounter = 0;
+
     @Override
     public void simulate(double elapsedDisplayTime) {
 
         float perSec = (float) (elapsedDisplayTime - lastTime);
         lastTime = elapsedDisplayTime;
+        gameTime+=perSec;
+        levelTime+=perSec;
+        if (levelTime > 5)
+        {
+            levelCounter++;
+            levelTime = 0;
+            botrow1.updateGame(levelCounter * 0.5);
+            botrow2.updateGame(levelCounter * 0.5);
+            botrow3.updateGame(levelCounter * 0.5);
+            botrow4.updateGame(levelCounter * 0.5);
+            botrow5.updateGame(levelCounter * 0.5);
+        }
 
         player.simulate(perSec);
         botrow1.simulate(perSec);
