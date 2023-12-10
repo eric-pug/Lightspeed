@@ -13,6 +13,7 @@ import android.hardware.SensorManager;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     MyRenderer my_renderer;
     SurfaceHolder holder = null;
 
+    GLSurfaceView sv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         surfaceView.setEGLConfigChooser(8,8,8,8,16,0);
         surfaceView.getHolder().setFormat(PixelFormat.RGBA_8888);
 
-
+        sv = surfaceView;
         my_renderer=new MyRenderer(this);
         // my_renderer.showCamera(findViewById(R.id.textureView));
 
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onPause(){
-
+        sv.onPause();
         my_renderer.pauseCamera();
         super.onPause();
     }
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onResume(){
         super.onResume();
+        sv.onResume();
         my_renderer.resumeCamera();
     }
 
@@ -153,11 +156,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onDataReceived(int time) {
-        Log.e("TEST", String.valueOf(time));
-        Intent i = new Intent(MainActivity.this, Leaderboard.class);
-        i.putExtra("score",time + score);
-        startActivity(i);
 
+        Intent x = new Intent(MainActivity.this, Leaderboard.class);
+        x.putExtra("score",time + score);
+        startActivity(x);
 
     }
 }

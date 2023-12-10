@@ -59,12 +59,13 @@ public class Leaderboard extends AppCompatActivity {
             i.putExtra("key",value);
             startActivity(i);
              */
+            Log.e("TEST", String.valueOf(score));
             findViewById(R.id.submitButton).setVisibility(View.VISIBLE);
             findViewById(R.id.inputEditText).setVisibility(View.VISIBLE);
             findViewById(R.id.score).setVisibility(View.VISIBLE);
             findViewById(R.id.FinalScore).setVisibility(View.VISIBLE);
             TextView temp = findViewById(R.id.score);
-            temp.setText(score);
+            temp.setText(Integer.toString(score));
         }
 
         List<PlayerData> playerList = getLeaderboardData(); // Retrieve data from the database
@@ -88,11 +89,14 @@ public class Leaderboard extends AppCompatActivity {
         // Insert sample data into the leaderboard table
         ContentValues values = new ContentValues();
         values.put("player_name", text);
-        values.put("score", 100);
+        values.put("score", score);
         db.insert("leaderboard", null, values);
         db.close();
 
         List<PlayerData> playerList = getLeaderboardData(); // Retrieve data from the database
+
+        findViewById(R.id.submitButton).setVisibility(View.GONE);
+        findViewById(R.id.inputEditText).setVisibility(View.GONE);
 
         // Set up RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
