@@ -1,15 +1,11 @@
 package com.example.dig4634.Lightspeed_Eric;
 
-import static com.example.dig4634.Lightspeed_Eric.MainActivity.score;
-
 import android.app.Activity;
 import android.opengl.GLES30;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-
-import javax.microedition.khronos.opengles.GL10;
 
 import gl.Texture;
 import gl.renderers.ThirdEyeRenderer;
@@ -18,20 +14,42 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
 
     Player player;
 
-    Level row1;
-    Level row2;
-    Level row3;
-    Level row4;
-    Level row5;
+    //BOTTOM ROWS
+    Level botrow1;
+    Level botrow2;
+    Level botrow3;
+    Level botrow4;
+    Level botrow5;
+
+    //TOP ROWS
+    Level toprow1;
+    Level toprow2;
+    Level toprow3;
+    Level toprow4;
+    Level toprow5;
+
+    //LEFT ROWS
+    AngledWall leftrow1;
+    AngledWall leftrow2;
+    AngledWall leftrow3;
+    AngledWall leftrow4;
+    AngledWall leftrow5;
+
+    //RIGHT ROWS
+    AngledWall rightrow1;
+    AngledWall rightrow2;
+    AngledWall rightrow3;
+    AngledWall rightrow4;
+    AngledWall rightrow5;
+
 
     //Texture wooden_texture;
-    Texture red_texture;
-    Texture green_texture;
-    Texture blue_texture;
+    Texture asteroid_texture;
+    Texture collect_texture;
+    Texture ship_texture;
 
     Texture space_texture;
-    double totalTime;
-    double levelTime;
+
     public MyRenderer(Activity activity){
         super(activity);
     }
@@ -42,31 +60,49 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
     @Override
     public void setup() {
 
-        red_texture=new Texture(getContext(),"red.png");
-        green_texture=new Texture(getContext(),"green.jpg");
-        blue_texture=new Texture(getContext(), "blue.jpg");
+        asteroid_texture =new Texture(getContext(),"asteroid.jpg");
+        collect_texture =new Texture(getContext(),"yellow.jpg");
+        ship_texture =new Texture(getContext(), "purple.jpg");
         space_texture =new Texture(getContext(), "space.png");
 
-        totalTime = 0;
+
         player =new Player();
-        player.setTexture(blue_texture);
+        player.setTexture(ship_texture);
         player.positionZ=-4;
-        levelVar = 0;
-        levelTime = 0;
-        row1 =new Level(10, -2, space_texture,green_texture, red_texture);
-        row2 =new Level(10, -1, space_texture,green_texture, red_texture);
-        row3 =new Level(10, 0, space_texture,green_texture, red_texture);
-        row4 =new Level(10, 1, space_texture,green_texture, red_texture);
-        row5 =new Level(10, 2, space_texture,green_texture, red_texture);
 
 
-        //background(153/255f,	204/255f,	255/255f);
+        botrow1 =new Level(20, -2, -2, space_texture, collect_texture, asteroid_texture);
+        botrow2 =new Level(20, -1, -2, space_texture, collect_texture, asteroid_texture);
+        botrow3 =new Level(20, 0, -2, space_texture, collect_texture, asteroid_texture);
+        botrow4 =new Level(20, 1, -2, space_texture, collect_texture, asteroid_texture);
+        botrow5 =new Level(20, 2, -2, space_texture, collect_texture, asteroid_texture);
+
+        toprow1 =new Level(20, -2, 2, space_texture, collect_texture, asteroid_texture);
+        toprow2 =new Level(20, -1, 2, space_texture, collect_texture, asteroid_texture);
+        toprow3 =new Level(20, 0, 2, space_texture, collect_texture, asteroid_texture);
+        toprow4 =new Level(20, 1, 2, space_texture, collect_texture, asteroid_texture);
+        toprow5 =new Level(20, 2, 2, space_texture, collect_texture, asteroid_texture);
+
+        leftrow1 =new AngledWall(20, -2, 2, -1, space_texture);
+        leftrow2 =new AngledWall(20, -2, 1, -1, space_texture);
+        leftrow3 =new AngledWall(20, -2, 0, -1, space_texture);
+        leftrow4 =new AngledWall(20, -2, -1, -1, space_texture);
+        leftrow5 =new AngledWall(20, -2, -2, -1, space_texture);
+
+        rightrow1 =new AngledWall(20, 2, 2, 1, space_texture);
+        rightrow2 =new AngledWall(20, 2, 1, 1, space_texture);
+        rightrow3 =new AngledWall(20, 2, 0, 1, space_texture);
+        rightrow4 =new AngledWall(20, 2, -1, 1, space_texture);
+        rightrow5 =new AngledWall(20, 2, -2, 1, space_texture);
+
+
+        background(5/255f,	5/255f,	5/255f);
         setLightDir(0,-1,-1);
 
     }
 
 
-    double levelVar;
+
     double lastTime=0;
 
     @Override
@@ -74,29 +110,34 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
 
         float perSec = (float) (elapsedDisplayTime - lastTime);
         lastTime = elapsedDisplayTime;
-        totalTime+=perSec;
-        levelTime+= perSec;
-        Log.e("Test", String.valueOf(totalTime));
-        if (levelTime > 5)
-        {
-            levelTime = 0;
-            levelVar += 0.5;
-            row1.updateObstacles(levelVar);
-            row2.updateObstacles(levelVar);
-            row3.updateObstacles(levelVar);
-            row4.updateObstacles(levelVar);
-            row5.updateObstacles(levelVar);
-        }
 
         player.simulate(perSec);
-        row1.simulate(perSec);
-        row2.simulate(perSec);
-        row3.simulate(perSec);
-        row4.simulate(perSec);
-        row5.simulate(perSec);
+        botrow1.simulate(perSec);
+        botrow2.simulate(perSec);
+        botrow3.simulate(perSec);
+        botrow4.simulate(perSec);
+        botrow5.simulate(perSec);
+
+        toprow1.simulate(perSec);
+        toprow2.simulate(perSec);
+        toprow3.simulate(perSec);
+        toprow4.simulate(perSec);
+        toprow5.simulate(perSec);
+
+        leftrow1.simulate(perSec);
+        leftrow2.simulate(perSec);
+        leftrow3.simulate(perSec);
+        leftrow4.simulate(perSec);
+        leftrow5.simulate(perSec);
+
+        rightrow1.simulate(perSec);
+        rightrow2.simulate(perSec);
+        rightrow3.simulate(perSec);
+        rightrow4.simulate(perSec);
+        rightrow5.simulate(perSec);
 
         //collision detection logic
-        Level[] rows = {row1, row2, row3, row4, row5};
+        Level[] rows = {botrow1, botrow2, botrow3, botrow4, botrow5};
         for (Level row : rows) {
             for (int i = 0; i < row.level_segments.length; i++) {
                 if (row.level_segments[i].collectible != null) {
@@ -129,12 +170,29 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
 
         player.draw();
 
-        row1.draw();
-        row2.draw();
-        row3.draw();
-        row4.draw();
-        row5.draw();
+        botrow1.draw();
+        botrow2.draw();
+        botrow3.draw();
+        botrow4.draw();
+        botrow5.draw();
 
+        toprow1.draw();
+        toprow2.draw();
+        toprow3.draw();
+        toprow4.draw();
+        toprow5.draw();
+
+        leftrow1.draw();
+        leftrow2.draw();
+        leftrow3.draw();
+        leftrow4.draw();
+        leftrow5.draw();
+
+        rightrow1.draw();
+        rightrow2.draw();
+        rightrow3.draw();
+        rightrow4.draw();
+        rightrow5.draw();
     }
 
 
