@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-feature android:glEsVersion="0x00030000" android:required="true"/>
-    <uses-feature android:name="android.hardware.camera2.full"/>
+    <uses-feature
+        android:glEsVersion="0x00030000"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera2.full" />
+
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -12,7 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppFullScreenTheme">
-        <activity android:name="com.example.dig4634.Lightspeed_Eric.MainActivity"
+        <activity
+            android:name=".Tutorial"
+            android:exported="false" />
+        <activity
+            android:name=".StartScreen"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/AppFullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,9 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Leaderboard">
-
-        </activity>
+        <activity android:name=".Leaderboard" />
     </application>
 
 </manifest>

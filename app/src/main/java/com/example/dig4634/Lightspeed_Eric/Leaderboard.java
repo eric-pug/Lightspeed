@@ -59,7 +59,6 @@ public class Leaderboard extends AppCompatActivity {
             i.putExtra("key",value);
             startActivity(i);
              */
-            Log.e("TEST", String.valueOf(score));
             findViewById(R.id.submitButton).setVisibility(View.VISIBLE);
             findViewById(R.id.inputEditText).setVisibility(View.VISIBLE);
             findViewById(R.id.score).setVisibility(View.VISIBLE);
