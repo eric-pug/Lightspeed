@@ -76,6 +76,10 @@ public class LevelSegment extends ShadedTexturedModel {
 
         if(positionZ>-2){
             positionZ=-2-segments*4;
+            if(Math.abs(positionX)>2)
+            {
+                positionX=0;
+            }
         }
 
 

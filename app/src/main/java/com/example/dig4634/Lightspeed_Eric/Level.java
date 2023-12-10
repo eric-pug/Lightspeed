@@ -6,11 +6,14 @@ public class Level {
 
     int segments=0;
     int row=0;
+
+    int ypos=-2;
     LevelSegment[] level_segments;
 
-    public Level(int s, int r, Texture texture, Texture texture_c, Texture texture_o){
+    public Level(int s, int r, int y, Texture texture, Texture texture_c, Texture texture_o){
         segments=s;
         row = r;
+        ypos = y;
 
         level_segments=new LevelSegment[s];
         for(int i=0;i<segments;i++){
@@ -18,13 +21,13 @@ public class Level {
             level_segments[i].setTexture(texture);
 
             level_segments[i].positionZ=-5-i*4;
-            level_segments[i].positionY=-2;
+            level_segments[i].positionY=y;
             level_segments[i].positionX=r*2;
 
             level_segments[i].speedZ=4;
             level_segments[i].segments=s;
 
-            if(Math.random()<0.12f) {
+            if(Math.random()<0.08f) {
                 level_segments[i].collectible = new Collectible();
                 level_segments[i].collectible.setTexture(texture_c);
                 level_segments[i].collectible.positionZ = -5 - i * 4;
@@ -34,7 +37,7 @@ public class Level {
                 level_segments[i].collectible.segments = s;
             }
 
-            if(Math.random()<0.10f) {
+            if(Math.random()<0.05f) {
                 level_segments[i].obstacle = new Obstacle();
                 level_segments[i].obstacle.setTexture(texture_o);
                 level_segments[i].obstacle.positionZ = -5 - i * 4;

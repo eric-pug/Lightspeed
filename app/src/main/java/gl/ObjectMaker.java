@@ -532,6 +532,9 @@ public class ObjectMaker extends Transform {
         this.popMatrix();
     };
 
+    public void sphere(float width, float height, float depth){
+        sphere(width,height,depth,16);
+    }
     public void sphere(float width, float height, float depth, int resolution){
         float x=width;
         float y=height;
@@ -549,11 +552,11 @@ public class ObjectMaker extends Transform {
         for(int j=0;j<res;j++)
             for(int i=0;i<res;i++)
             {
-                xyz[c1]=(float)(0.5* Math.cos(3.1416*(j/(res-1)-0.5))* Math.cos(2*3.1416*i/(res-1)-3.1416/2));nrm[c1]=xyz[c1]*2;c1+=1;
-                xyz[c1]=(float)(0.5* Math.sin(3.1416*(j/(res-1)-0.5)));nrm[c1]=xyz[c1]*2;c1+=1;
-                xyz[c1]=(float)(0.5* Math.cos(3.1416*(j/(res-1)-0.5))* Math.sin(2*3.1416*i/(res-1)-3.1416/2));nrm[c1]=xyz[c1]*2;c1+=1;
+                xyz[c1]=(float)(0.5* Math.cos(3.1416*(j/(res-1f)-0.5))* Math.cos(2*3.1416*i/(res-1f)-3.1416/2));nrm[c1]=xyz[c1]*2;c1+=1;
+                xyz[c1]=(float)(0.5* Math.sin(3.1416*(j/(res-1f)-0.5)));nrm[c1]=xyz[c1]*2;c1+=1;
+                xyz[c1]=(float)(0.5* Math.cos(3.1416*(j/(res-1f)-0.5))* Math.sin(2*3.1416*i/(res-1f)-3.1416/2));nrm[c1]=xyz[c1]*2;c1+=1;
                 uv[c2]=1-i/(res-1.0f);c2+=1;
-                uv[c2]=j/(res-1.0f);c2+=1;
+                uv[c2]=1-j/(res-1.0f);c2+=1;
                 if(i<res-1&&j<res-1)
                 {
                     if(j>0){tri[c3]=c4;c3+=1;tri[c3]=c4+res;c3+=1;tri[c3]=c4+1;c3+=1;}
