@@ -8,10 +8,21 @@ public class Level {
     int row=0;
     LevelSegment[] level_segments;
 
+    Texture texture_c;
+
+    Texture texture_o;
+    Texture texture_m;
+    int s;
+    int r;
     public Level(int s, int r, Texture texture, Texture texture_c, Texture texture_o){
         segments=s;
         row = r;
 
+        this.texture_c = texture_c;
+        this.texture_o = texture_o;
+        this.texture_m = texture;
+        this.s = s;
+        this.r = r;
         level_segments=new LevelSegment[s];
         for(int i=0;i<segments;i++){
             level_segments[i]=new LevelSegment();
@@ -43,6 +54,26 @@ public class Level {
                 level_segments[i].obstacle.speedZ = 8;
                 level_segments[i].obstacle.segments = s;
             }
+        }
+    }
+
+    public void updateObstacles(double input)
+    {
+        for(int i=0;i<segments;i++){
+            if(Math.random()<0.02f) {
+                level_segments[i].obstacle = new Obstacle();
+                level_segments[i].obstacle.setTexture(texture_o);
+                level_segments[i].obstacle.positionZ = -5 - i * 4;
+                level_segments[i].obstacle.positionY = -1f;
+                level_segments[i].obstacle.positionX = (float) ((Math.random()-0.5f) * 5f);
+                level_segments[i].obstacle.speedZ = (float) (8 + input);
+                level_segments[i].obstacle.segments = s;
+            }
+
+            if (level_segments[i].collectible != null)
+                level_segments[i].collectible.speedZ = (float) (8 + input);
+            if (level_segments[i].obstacle != null)
+                level_segments[i].obstacle.speedZ = (float) (8+input);
         }
     }
 

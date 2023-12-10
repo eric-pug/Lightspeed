@@ -30,7 +30,8 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
     Texture blue_texture;
 
     Texture space_texture;
-
+    double totalTime;
+    double levelTime;
     public MyRenderer(Activity activity){
         super(activity);
     }
@@ -46,12 +47,12 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
         blue_texture=new Texture(getContext(), "blue.jpg");
         space_texture =new Texture(getContext(), "space.png");
 
-
+        totalTime = 0;
         player =new Player();
         player.setTexture(blue_texture);
         player.positionZ=-4;
-
-
+        levelVar = 0;
+        levelTime = 0;
         row1 =new Level(10, -2, space_texture,green_texture, red_texture);
         row2 =new Level(10, -1, space_texture,green_texture, red_texture);
         row3 =new Level(10, 0, space_texture,green_texture, red_texture);
@@ -65,7 +66,7 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
     }
 
 
-
+    double levelVar;
     double lastTime=0;
 
     @Override
@@ -73,6 +74,19 @@ public class MyRenderer extends ThirdEyeRenderer implements View.OnTouchListener
 
         float perSec = (float) (elapsedDisplayTime - lastTime);
         lastTime = elapsedDisplayTime;
+        totalTime+=perSec;
+        levelTime+= perSec;
+        Log.e("Test", String.valueOf(totalTime));
+        if (levelTime > 5)
+        {
+            levelTime = 0;
+            levelVar += 0.5;
+            row1.updateObstacles(levelVar);
+            row2.updateObstacles(levelVar);
+            row3.updateObstacles(levelVar);
+            row4.updateObstacles(levelVar);
+            row5.updateObstacles(levelVar);
+        }
 
         player.simulate(perSec);
         row1.simulate(perSec);
