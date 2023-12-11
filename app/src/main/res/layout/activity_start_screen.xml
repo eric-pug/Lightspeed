@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#190D25"
+    android:backgroundTint="#190D25"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="409dp"
         android:layout_height="734dp"
-        android:layout_marginEnd="2dp"
-        android:background="#190E2E"
+        android:background="#190D25"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.666"
@@ -24,20 +25,36 @@
         android:id="@+id/button2"
         android:layout_width="130dp"
         android:layout_height="49dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="571dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="47dp"
         android:onClick="onLeaderboardPressed"
         android:text="Leaderboard"
         android:textAlignment="center"
-        tools:layout_editor_absoluteX="246dp"
-        tools:layout_editor_absoluteY="571dp" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="130dp"
         android:layout_height="49dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="571dp"
+        android:layout_marginBottom="47dp"
         android:onClick="onTutorialPressed"
         android:text="Tutorial"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="571dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/playbutton"
@@ -48,4 +65,4 @@
         tools:layout_editor_absoluteX="176dp"
         tools:layout_editor_absoluteY="834dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

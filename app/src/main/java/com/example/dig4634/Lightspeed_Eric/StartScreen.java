@@ -16,7 +16,7 @@ public class StartScreen extends AppCompatActivity {
     }
 
     public void onPlayPressed(View view) {
-        Intent myIntent=new Intent(getBaseContext(),Tutorial.class);
+        Intent myIntent=new Intent(getBaseContext(),MainActivity.class);
         startActivity(myIntent);
     }
 
@@ -26,7 +26,7 @@ public class StartScreen extends AppCompatActivity {
     }
 
     public void onLeaderboardPressed(View view) {
-        Intent myIntent=new Intent(getBaseContext(),Tutorial.class);
+        Intent myIntent=new Intent(getBaseContext(),Leaderboard.class);
         startActivity(myIntent);
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5C5C5C"
+    android:background="#190D25"
     tools:context=".MainActivity">
 
     <TextView
@@ -58,7 +58,7 @@
         android:fontFamily="monospace"
         android:text="XXXX"
         android:textAlignment="center"
-        android:textColor="#0FE818"
+        android:textColor="#962A99"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -84,6 +84,7 @@
             android:ems="10"
             android:inputType="text"
             android:text="Name"
+            android:textColor="#FFFDFD"
             android:textSize="34sp" />
 
         <Button
@@ -107,8 +108,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:backgroundTint="#000000"
+        android:backgroundTint="#962A99"
         android:fontFamily="monospace"
+        android:onClick="onBackPressed"
         android:text="Back"
         android:textColor="#F9FAFB"
         android:textSize="34sp"
